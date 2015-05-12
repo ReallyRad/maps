@@ -9,14 +9,14 @@ void setup() {
 
 void draw() {
   setColor();
-  background(168);
-  int rotations = 102; //number of repetitions along rotation
-  int radius = 20;  //number of repetitions radially 
-  float circleDiameter = 0.01; //circles size
-  int betweenCircles = 37; //distance between circles
+  background(220);
+  int rotations = 28; //number of repetitions along rotation
+  int radius = 77;  //number of repetitions radially 
+  float circleDiameter = 0.05; //circles size
+  int betweenCircles = 3; //distance between circles
 
-  offset+=0.14;
-  if (offset>25.6) offset=0.0;
+  offset+=0.19;
+  if (offset>120.6) offset=19.8;
 
   noStroke();
   
@@ -30,7 +30,7 @@ void draw() {
       float x = cos(TWO_PI/rotations*j)*i*betweenCircles;
       float y = sin(TWO_PI/rotations*j)*i*betweenCircles;
       float dist = dist( width/2, height/2, x, y );
-      float scale = map( dist, 0, width/2, 1, 2 );
+      float scale = map( dist, 0, width/2, 1, 3 );
       pushMatrix();
       translate( x, y );
       scale( scale );
@@ -42,16 +42,16 @@ void draw() {
 }
 
 int gauss (float i, float offset) {//sample bell curve at i, given center of bell curve at offset
-  float x = 0.5 * (i - offset + 3) - 1.5;
-  return (int)(255.f * pow(5, -pow(x * 0.2, 2)));
+  float x = -0.3 * (i - offset + 3) - 2.5;
+  return (int)(255.f * pow(5, -pow(x * 0.3, 2)));
 }
 
 void setColor() {
-  fancyColor[0] = color(114, 96, 96);
+  fancyColor[0] = color(175, 175, 175);
   fancyColor[1] = color(226, 0, 0);
   fancyColor[2] = color(254, 250, 250);
   fancyColor[3] = color(0, 2, 2);
-  fancyColor[4] = color(15, 220, 15);
+  fancyColor[4] = color(72, 228, 72);
   fancyColor[5] = color(37, 35, 35);
   fancyColor[6] = color(121, 121, 121);
 }
