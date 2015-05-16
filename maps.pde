@@ -10,28 +10,29 @@ void setup() {
 void draw() {
   setColor();
   background(220);
-  int rotations = 13; //number of repetitions along rotation
-  int radius = 73;  //number of repetitions radially 
-  float circleDiameter = 0.10; //circles size
-  int betweenCircles = -1; //distance between circles
+  int rotations = 6; //number of repetitions along rotation
+  int radius = 29;  //number of repetitions radially 
+  float circleDiameter = 0.17; //circles size
+  int betweenCircles = 8; //distance between circles
 
-  offset+=1.24;
-  if (offset>77.8) offset=0.3;
+  offset+=0.03;
+  if (offset>80.0) offset=1.2;
 
-  noStroke();
+  //noStroke()
+  strokeWeight(0.1);
   
   pushMatrix();
   translate(400, 400);
-  rotate(offset*0.02);
-  for (int k=0; k<3; k++) {
+  rotate(offset*0.01);
+  for (int k=0; k<1; k++) {
   for (int i=0; i < radius; i++) {    
     for (int j=0; j<rotations; j++) {
       fill(fancyColor[j%fancyColor.length]);
-      float rad = gauss(i, offset+60*k)*circleDiameter;
+      float rad = gauss(i, offset+-9*k)*circleDiameter;
       float x = cos(TWO_PI/rotations*j)*i*betweenCircles;
       float y = sin(TWO_PI/rotations*j)*i*betweenCircles;
       float dist = dist( width/2, height/2, x, y );
-      float scale = map( dist, 0, width/2, 8, 4 );
+      float scale = map( dist, 4, width/2, 8, 6 );
       pushMatrix();
       translate( x, y );
       scale( scale );
@@ -50,10 +51,10 @@ int gauss (float i, float offset) {//sample bell curve at i, given center of bel
 
 void setColor() {
   fancyColor[0] = color(143, 143, 143, 174);
-  fancyColor[1] = color(253, 214, 0, 198);
-  fancyColor[2] = color(183, 182, 179, 230);
-  fancyColor[3] = color(0, 2, 2, 133);
+  fancyColor[1] = color(253, 0, 6, 186);
+  fancyColor[2] = color(183, 182, 179, 195);
+  fancyColor[3] = color(0, 2, 2, 98);
   fancyColor[4] = color(72, 228, 72, 191);
-  fancyColor[5] = color(37, 35, 35, 5);
-  fancyColor[6] = color(121, 121, 121, 89);
+  fancyColor[5] = color(37, 35, 35, 42);
+  fancyColor[6] = color(121, 121, 121, 97);
 }
