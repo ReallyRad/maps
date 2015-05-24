@@ -3,7 +3,7 @@ color [] fancyColor = new color[7];
 boolean goUp;
 
 void setup() {
-  size(400, 400);
+  size(800, 600);
   offset = 27;
   setColor();
   goUp=true;
@@ -12,23 +12,27 @@ void setup() {
 void draw() {
   setColor();
   //background(220,143);
+  fill(123, 2);
+  rect(0,0,width, height);
   int rotations = 9; //number of repetitions along rotation
-  int radius = 36;  //number of repetitions radially 
-  float circleDiameter = 0.12; //circles size
-  float betweenCircles = 28.03; //distance between circles
-  float step = 0.25;
-  if (goUp) offset+=step;
-  if (!goUp) offset-=step;
-  if (offset>41.6) goUp = false;
-  if (offset<7) goUp = true;
+  int radius = 28;  //number of repetitions radially 
+  float circleDiameter = 0.16; //circles size
+  float betweenCircles = 29.99; //distance between circles
+  float step = 0.01;
+  float upperBound = 41.9;
+  float lowerBound = 7;
+  if (goUp) offset+=step*(upperBound-offset);
+  if (!goUp) offset-=step*(offset-lowerBound);
+  if (offset>upperBound-3) goUp = false;
+  if (offset<lowerBound+3) goUp = true;
   
-  noStroke();
-  //strokeWeight(0.0);
+  //noStroke();
+  strokeWeight(0.0);
   
   pushMatrix();
   translate(width/2, height/2);
-  rotate(offset*0.08);
-  for (int k=0; k<1; k++) {
+  rotate(offset*0.00);
+  for (int k=0; k<2; k++) {
   for (int i=0; i < radius; i++) {    
     for (int j=0; j<rotations; j++) {
       fill(fancyColor[j%fancyColor.length]);
@@ -54,11 +58,11 @@ int gauss (float i, float offset) {//sample bell curve at i, given center of bel
 }
 
 void setColor() {
-  fancyColor[0] = color(253, 93, 93, 251);
-  fancyColor[1] = color(166, 150, 150, 288);
-  fancyColor[2] = color(5, 5, 5, 337);
-  fancyColor[3] = color(0, 249, 70, 380);
-  fancyColor[4] = color(235, 235, 235, 294);
+  fancyColor[0] = color(253, 93, 93, 407);
+  fancyColor[1] = color(166, 150, 150, 285);
+  fancyColor[2] = color(5, 5, 5, 263);
+  fancyColor[3] = color(0, 249, 70, 260);
+  fancyColor[4] = color(235, 235, 235, 286);
   fancyColor[5] = color(37, 35, 35, 278);
   fancyColor[6] = color(163, 159, 159, 250);
 }
