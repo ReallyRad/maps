@@ -1,34 +1,38 @@
 float offset;
 color [] fancyColor = new color[7];
+boolean goUp;
 
 void setup() {
-  size(800, 800);
-  offset = -1.5;
+  size(400, 400);
+  offset = 27;
   setColor();
+  goUp=true;
 }
 
 void draw() {
   setColor();
-  background(220);
-  int rotations = 6; //number of repetitions along rotation
-  int radius = 29;  //number of repetitions radially 
-  float circleDiameter = 0.17; //circles size
-  int betweenCircles = 8; //distance between circles
-
-  offset+=0.03;
-  if (offset>80.0) offset=1.2;
-
-  //noStroke()
-  strokeWeight(0.1);
+  //background(220,143);
+  int rotations = 10; //number of repetitions along rotation
+  int radius = 112;  //number of repetitions radially 
+  float circleDiameter = 0.08; //circles size
+  float betweenCircles = 11.56; //distance between circles
+  float step = 0.10;
+  if (goUp) offset+=step;
+  if (!goUp) offset-=step;
+  if (offset>48.0) goUp = false;
+  if (offset<1) goUp = true;
+  
+  noStroke();
+  //strokeWeight(0.0);
   
   pushMatrix();
-  translate(400, 400);
-  rotate(offset*0.01);
+  translate(width/2, height/2);
+  rotate(offset*0.02);
   for (int k=0; k<1; k++) {
   for (int i=0; i < radius; i++) {    
     for (int j=0; j<rotations; j++) {
       fill(fancyColor[j%fancyColor.length]);
-      float rad = gauss(i, offset+-9*k)*circleDiameter;
+      float rad = gauss(i, offset+18*k)*circleDiameter;
       float x = cos(TWO_PI/rotations*j)*i*betweenCircles;
       float y = sin(TWO_PI/rotations*j)*i*betweenCircles;
       float dist = dist( width/2, height/2, x, y );
@@ -36,7 +40,7 @@ void draw() {
       pushMatrix();
       translate( x, y );
       scale( scale );
-      ellipse(0, 0, rad, rad);
+      ellipse(0+noise(0.0), 0+noise(0.0), rad+noise(0.0), rad+noise(0.1));
       popMatrix();
     }
   }
@@ -46,15 +50,15 @@ void draw() {
 
 int gauss (float i, float offset) {//sample bell curve at i, given center of bell curve at offset
   float x = -0.6 * (i - offset + 20) - 5.2;
-  return (int)(230 * pow(3, -pow(x * 0.1, 2)));
+  return (int)(230 * pow(3, -pow(x * 0.4, 2)));
 }
 
 void setColor() {
-  fancyColor[0] = color(143, 143, 143, 174);
-  fancyColor[1] = color(253, 0, 6, 186);
-  fancyColor[2] = color(183, 182, 179, 195);
-  fancyColor[3] = color(0, 2, 2, 98);
-  fancyColor[4] = color(72, 228, 72, 191);
-  fancyColor[5] = color(37, 35, 35, 42);
-  fancyColor[6] = color(121, 121, 121, 97);
+  fancyColor[0] = color(214, 186, 186, 289);
+  fancyColor[1] = color(82, 78, 78, 319);
+  fancyColor[2] = color(5, 5, 5, 280);
+  fancyColor[3] = color(0, 2, 2, 380);
+  fancyColor[4] = color(24, 25, 24, 332);
+  fancyColor[5] = color(37, 35, 35, 246);
+  fancyColor[6] = color(163, 159, 159, 250);
 }
